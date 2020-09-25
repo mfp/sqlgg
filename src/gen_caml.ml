@@ -120,9 +120,11 @@ let comment () fmt = Printf.kprintf (indent_endline $ make_comment) fmt
 let empty_line () = print_newline ()
 
 module L = struct
+  open Type
+
   let as_lang_type = function
-  | Type.Blob -> Type.to_string Type.Text
-  | t -> Type.to_string t
+  | { t = Blob; nullable } -> type_name { t = Text; nullable }
+  | t -> type_name t
 
   let as_api_type = as_lang_type
 end
