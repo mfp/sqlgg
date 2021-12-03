@@ -68,6 +68,7 @@ struct
       | `Null -> "null"
       | `Int x -> sprintf "int %d" x
       | `Int64 x -> sprintf "int64 %Ld" x
+      | `UInt64 x -> sprintf "uint64 %s" (Unsigned.UInt64.to_string x)
       | `Float x -> sprintf "float %f" x
       | `String x -> sprintf "string %S" x
       | `Bytes x -> sprintf "bytes %S" (Bytes.to_string x)
@@ -84,6 +85,7 @@ struct
       match M.Field.value field with
       | `Int x -> Int64.of_int x
       | `Int64 x -> x
+      | `UInt64 x -> Unsigned.UInt64.to_int64 x
       | `String x -> Int64.of_string x
       | value -> convfail "int" field value
     let to_value x = `Int64 x
